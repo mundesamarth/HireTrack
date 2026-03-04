@@ -30,6 +30,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+
+  emails        EmailData[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -74,4 +76,15 @@ model VerificationToken {
  
   @@unique([identifier, token])
 }
- 
+model EmailData {
+  id        String   @id @default(cuid()) 
+  gmailId   String   @unique           
+  snippet   String
+  subject   String
+  from      String
+  date      DateTime
+
+  // The Relation
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
