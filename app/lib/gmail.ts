@@ -22,4 +22,5 @@ export default async function getGmailClient(userId: string){
     })
 
     return google.gmail({version: "v1", auth })
+
 }
