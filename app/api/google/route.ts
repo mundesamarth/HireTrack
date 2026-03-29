@@ -13,10 +13,15 @@ export async function GET() {
 
   const syncGmail = await syncEmail(session.user.id);
 
-  const user = await prisma.emailData.findMany({
+  const user = await prisma.application.findMany({
     where:{userId: session.user.id},
-    select: {subject: true, snippet: true},
-    orderBy: {date: 'desc'}
+    select: {companyName:true,
+          positionTitle:true,
+          interviewDate: true,
+          status: true,
+          location: true,
+          interviewType: true},
+    orderBy: {interviewDate: 'desc'}
 
   })  
   return Response.json(user);

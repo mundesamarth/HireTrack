@@ -55,7 +55,7 @@ export default async function syncEmail(userId: string) {
 
     // Passing the Decoded body into the AI Extractor
     const gmailExtractor = await extractJobDetails(decodedBase64);
-    console.log(gmailExtractor)
+
     // Upserting the output from the AI in Application schema
     if (gmailExtractor && gmailExtractor.company && gmailExtractor.role) {
       // Setting up the date

@@ -12,7 +12,7 @@ const ai = new GoogleGenAI({ apiKey });
 export async function extractJobDetails(text: any) {
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview", 
+      model: "gemini-3-flash-preview",
       contents: text,
       config: {
         systemInstruction: `Extract job application data. Return ONLY JSON:
@@ -28,12 +28,11 @@ export async function extractJobDetails(text: any) {
       },
     });
 
-    const rawData = response.text; 
+    const rawData = response.text;
     if (!rawData) {
       throw new Error("No text returned from Gemini");
     }
-    return JSON.parse(rawData); 
-
+    return JSON.parse(rawData);
 
   } catch (error) {
     console.error("AI Extraction Failed:", error);
