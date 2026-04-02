@@ -90,10 +90,5 @@ export default async function syncEmail(userId: string) {
         },
       });
     }
-    // connecting the extractor.ts
-    // const aiData = await extractJobDetails(decodedBase64);
-    // console.log("-----------------------------------");
-    // console.log(`📧 Processing: ${subject}`);
-    // console.log("🤖 AI Extraction:", JSON.stringify(aiData, null, 2))
   }
 }

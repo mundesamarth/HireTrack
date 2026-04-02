@@ -1,15 +1,25 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Sidebar from "./components/Sidebar";
 
 export default function Home() {
   return (
-    <div className="flex items-center justify-center h-40 ">
-      <Button className="p-10 bg-red-500 text-amber-100 text-2xl">
-        <Link href="api/auth/signin"> Google Sign In</Link>
-      </Button>
-          <Button className="p-10 bg-red-500 text-amber-100 text-2xl">
-        <Link href="/api/google"> Check Gmail</Link>
-      </Button>
+    <div className="text-foreground-1">
+      <h1 className="mb-10">Dashboard</h1>
+      <div className="border-dashed border border-red-900 w-full h-[250px] mb-20"> Dashboard</div>
+      <div className="border-dashed border border-red-900 w-full h-[450px] mb-20"> Dashboard</div>
+      <div className="border-dashed border border-red-900 w-full h-[450px] mb-20"> Dashboard</div>
+      <div className="border-dashed border border-red-900 w-full h-[450px] mb-20"> Dashboard</div>
+      <div className="border-dotted border border-red-900 w-full h-[450px] mb-20"> Dashboard</div>
+
     </div>
+    // <div className="flex items-center justify-center h-40 bg-background ">
+    //   <Button className="p-10 bg-secondary text-foreground-3 text-2xl">
+    //     <Link href="api/auth/signin"> Google Sign In</Link>
+    //   </Button>
+    //       <Button className="p-10 bg-secondary text-foreground-3 text-2xl ">
+    //     <Link href="/api/google"> Check Gmail</Link>
+    //   </Button>
+    // </div>
   );
 }
