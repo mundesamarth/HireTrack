@@ -26,7 +26,7 @@ export default function Sidebar() {
   return (
     <aside
       className={cn(
-        "min-h-screen bg-sidebar overflow-hidden transition-[width] duration-500 ease-in-out",
+        "min-h-screen bg-sidebar overflow-hidden transition-[width] duration-500 ease-in-out border-r border-border",
         isCollapsed ? "w-[88px]" : "w-[248px]",
       )}
     >

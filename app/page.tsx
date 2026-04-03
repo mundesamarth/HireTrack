@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Sidebar from "./components/Sidebar";
+import TopheaderSection from "./components/Topheader";
 
 export default function Home() {
   return (
     <div className="text-foreground-1">
-      <h1 className="mb-10">Dashboard</h1>
-      <div className="border-dashed border border-red-900 w-full h-[250px] mb-20"> Dashboard</div>
+      <TopheaderSection/>
       <div className="border-dashed border border-red-900 w-full h-[450px] mb-20"> Dashboard</div>
       <div className="border-dashed border border-red-900 w-full h-[450px] mb-20"> Dashboard</div>
       <div className="border-dashed border border-red-900 w-full h-[450px] mb-20"> Dashboard</div>
