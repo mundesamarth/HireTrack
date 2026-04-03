@@ -40,7 +40,7 @@ export default function Syncbutton() {
       </div>
       {/* Middle */}
       <div>
-        <div className="text-[14px] font-medium">Gmail sync</div>
+        <div className="text-[14px] font-medium  text-foreground-1 ">Gmail sync</div>
         <div className="text-[12px] text-foreground-3">
           Last synced Today, 00:25
         </div>
@@ -48,7 +48,7 @@ export default function Syncbutton() {
       {/* Right */}
       <div>
         <Button className="!rounded-[12px] text-background bg-foreground-1 text-sm py-4 hover:opacity-92 font-medium ml-auto shrink-0 cursor-pointer  !px-4">
-          <RefreshCcw className="!w-3.5 !h-3.5 scale-x-[-1]" />
+          <RefreshCcw className="!w-3.5 !h-3.5 scale-x-[-1] " />
           Sync Gmail
         </Button>
       </div>

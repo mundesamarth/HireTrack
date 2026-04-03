@@ -19,7 +19,8 @@ export default function Searchbar(){
               </div>
               <div className="text-foreground-3 flex gap-2 items-center text-xs">
                 <span className="text-[9px] w-[20px] h-[20px] flex items-center justify-center rounded-[6px] border border-border ">
-                  /
+
+                  <kbd>/</kbd>
                 </span>
                 Search
               </div>

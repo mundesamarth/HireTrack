@@ -14,6 +14,7 @@
   --font-space: var(--fonts-grotesk);
   --color-sidebar:var(--sidebar);
   --color-surface: var(--surface);
+  --shadow-raised-shadow: var(--raised-shadow);
   --color-surface-muted:var(--surface-muted);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -50,6 +51,7 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --animation: var(--animation);
 }
 
 :root {
@@ -82,8 +84,8 @@
   --border: #3d3441;
   --border-strong: #5a4f60;
   --accent: #c78db0;
-
-
+  --animation: spin-reverse 1s linear infinite;
+  --raised-shadow: 0 1px 0 rgba(255,255,255,0.02), 0 10px 24px rgba(0,0,0,0.16);
 
 }
 

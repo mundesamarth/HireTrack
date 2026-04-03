@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Searchbar from "./Searchbar";
 import Syncbutton from "./Syncbutton";
+
+
 export default function TopheaderSection() {
   const pathname = usePathname();
 
@@ -37,10 +39,10 @@ export default function TopheaderSection() {
   ];
   const currentHeading = headingLabel.find((h) => h.href === pathname);
   return (
-    <div className="flex justify-between mt-7 h-auto min-w-560px max-w-720px mb-10 border-b pb-5 sm:flex-wrap ">
+    <div className="flex justify-between mt-7 h-auto min-w-560px max-w-720px  border-b pb-5 sm:flex-wrap ">
       {/* Left Section  */}
       <div className="">
-        <div className="text-[34px] font-[600] leading-none tracking-[-0.06rem]">
+        <div className="text-[34px] font-[600] leading-none tracking-[-0.06rem] text-foreground-1">
           {currentHeading?.label}
         </div>
         <div className="text-sm mt-2 text-foreground-2">
