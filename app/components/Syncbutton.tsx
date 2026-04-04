@@ -35,8 +35,11 @@ export default function Syncbutton() {
   return (
     <div className=" shrink-0">
 
-    <div className="border border-border min-w-0  bg-surface rounded-[12px] min-h-[52px]  flex items-center justify-center gap-x-[12px]  py-2.5 px-2.5  ">
+    <div className="border border-border min-w-0  bg-surface rounded-[12px] min-h-[52px]  flex justify-between  gap-x-[12px]  py-2.5 px-2.5  ">
       {/* Left */}
+
+      <div className="flex  items-center gap-1">
+
       <div className="w-8 h-8 flex items-center justify-center bg-surface-muted rounded-[8px]">
         <Mail className="text-foreground-3 h-4 w-4" />
       </div>
@@ -46,6 +49,7 @@ export default function Syncbutton() {
         <div className="text-[12px] text-foreground-3  text-xs">
           Last synced Today, 00:25
         </div>
+      </div>
       </div>
       {/* Right */}
       <div>
