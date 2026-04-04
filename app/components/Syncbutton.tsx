@@ -33,15 +33,17 @@ import { CloudSync, Mail, RefreshCcw } from "lucide-react";
 
 export default function Syncbutton() {
   return (
-    <div className="rounded-[12px] border border-border min-h-[52px] bg-surface flex items-center justify-center px-2.5 gap-3">
+    <div className=" shrink-0">
+
+    <div className="border border-border min-w-0  bg-surface rounded-[12px] min-h-[52px]  flex items-center justify-center gap-x-[12px]  py-2.5 px-2.5  ">
       {/* Left */}
       <div className="w-8 h-8 flex items-center justify-center bg-surface-muted rounded-[8px]">
         <Mail className="text-foreground-3 h-4 w-4" />
       </div>
       {/* Middle */}
-      <div>
-        <div className="text-[14px] font-medium  text-foreground-1 ">Gmail sync</div>
-        <div className="text-[12px] text-foreground-3">
+      <div className="min-w-0">
+        <div className="text-[14px] font-medium  text-foreground-1 text-sm ">Gmail sync</div>
+        <div className="text-[12px] text-foreground-3  text-xs">
           Last synced Today, 00:25
         </div>
       </div>
@@ -51,6 +53,7 @@ export default function Syncbutton() {
           <RefreshCcw className="!w-3.5 !h-3.5 scale-x-[-1] " />
           Sync Gmail
         </Button>
+    </div>
       </div>
     </div>
   );

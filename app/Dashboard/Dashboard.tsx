@@ -5,7 +5,7 @@ import TopmetricsSection from "../components/TopmetricsSection";
 
 export default function Dashboard(){
     return(
-        <div className="">
+        <div className="min-w-0">
             <TopheaderSection/>
             <TopmetricsSection/>
             <MetricsSection/>
