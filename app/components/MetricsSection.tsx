@@ -1,4 +1,4 @@
-// 7. Metrics Section Design System
+// 7. 
 
 // This is the summary area with:
 // - Total Applications
@@ -35,7 +35,7 @@
 // - Emphasis comes from typography and spacing, not heavy color fills
 
 import { cn } from "@/lib/utils";
-import {  BriefcaseBusiness, CalendarClock, Sparkles } from "lucide-react";
+import { BriefcaseBusiness, CalendarClock, Sparkles } from "lucide-react";
 
 export default function MetricsSection() {
   const metricsContent = [
@@ -61,23 +61,26 @@ export default function MetricsSection() {
   ];
 
   return (
-    <div className="mt-2 flex gap-4 justify-evenly">
+    <div className="grid gap-4 lg:grid-cols-3 mt-2 ">
       {metricsContent.map(
         ({ heading, number, subHeading, icon: Icon, label }) => (
-          <div className="text-foreground-1 flex-1  flex-wrap rounded-[10px] flex justify-between bg-surface border border-border px-[20px] py-[20px]">
-            <div className="">
+          <div
+            key={heading}
+            className="text-foreground-1  rounded-[10px] flex justify-between bg-surface border border-border p-5 "
+          >
+            <div className="min-w-0">
               <div className="text-[14px] text-foreground-3">{heading}</div>
               <div className="mt-3 text-foreground-1 leading-none tracking-[-0.04em]">
-                <div className="flex items-center gap-3 ">
+                <div className="flex gap-3 ">
                   <p className="text-[30px] font-bold ">{number}</p>
                   {label && (
-                   <div className="inline-flex items-center gap-2 rounded-[8px] border  px-2 py-1 text-xs  border-emerald-900bg-emerald-950/40 text-emerald-300">
-                    <span className="relative flex h-2.5 w-2.5">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
-                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                    </span>
-                    Live
-                  </div>
+                    <div className="inline-flex items-center gap-2 rounded-[8px] border  px-2 py-1 text-xs  border-emerald-900 bg-emerald-950/40 text-emerald-300">
+                      <span className="relative flex h-2.5 w-2.5">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-200 opacity-70" />
+                        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                      </span>
+                      Live
+                    </div>
                   )}
                 </div>
               </div>

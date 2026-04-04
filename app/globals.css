@@ -130,7 +130,5 @@
   body {
     @apply bg-background font-space ;
   }
-  html {
-    @apply font-sans;
-  }
+  
 }
