@@ -55,7 +55,7 @@ const filterArea = [
   {
     label: "Interviewing",
     number: "14",
-    badge: "border-emerald-900 bg-emerald-950/40 text-emerald-300'",
+    badge: "border-emerald-900 bg-emerald-950/40 text-emerald-300",
   },
   {
     label: "Rejected",

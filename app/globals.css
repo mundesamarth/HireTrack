@@ -132,3 +132,30 @@
   }
   
 }
+
+
+/* Scrollbar styling */
+@layer utilities {
+  .scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #2a2a2a #0a0a0a;
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 999px;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #3a3a3a;
+  }
+}

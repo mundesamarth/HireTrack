@@ -31,8 +31,8 @@ export default function RootLayout({
         <div className="flex h-screen overflow-hidden">
           <Sidebar />
           <div className="flex-1 min-w-0">
-            <div className="h-full overflow-y-auto overflow-x-hidden">
-              <div className="mx-auto w-full px-10">{children}</div>
+            <div className="h-full overflow-y-auto overflow-x-hidden scrollbar">
+              <div className="mx-auto w-full px-8">{children}</div>
             </div>
           </div>
         </div>
