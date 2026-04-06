@@ -12,10 +12,10 @@ const ai = new GoogleGenAI({ apiKey });
 export async function extractJobDetails(text: any) {
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-2.5-flash-lite",
       contents: text,
       config: {
-        systemInstruction: `Extract job application data. Return ONLY JSON:
+        systemInstruction: `Extract job application data. Return ONLY JSON. ONLY use the provided text, do not invent data:
         {
           "company": string,
           "role": string,
