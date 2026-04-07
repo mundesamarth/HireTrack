@@ -5,12 +5,29 @@ import { extractJobDetails } from "../ai/extractor";
 export default async function syncEmail(userId: string) {
   const gmailClient = await getGmailClient(userId);
 
-  const listResposne = await gmailClient.users.messages.list({
-    userId: "me",
-    maxResults: 5,
-    q: "in:inbox",
+  const userQuery = await prisma.user.findUnique({
+    where: { id: userId },
   });
-  const messages = listResposne.data.messages || [];
+
+  // Checking if its the new user and its there first sync
+  let maxResultsQuery;
+  let query;
+  if (userQuery?.lastSyncedAt) {
+    const lastSyncedInSeconds = Math.floor(
+      userQuery.lastSyncedAt.getTime() / 1000,
+    );
+    maxResultsQuery = 20;
+    query = `after:${lastSyncedInSeconds} in:inbox`;
+  } else {
+    maxResultsQuery = 10;
+    query = "in:inbox";
+  }
+  const listResponse = await gmailClient.users.messages.list({
+    userId: "me",
+    maxResults: maxResultsQuery,
+    q: query,
+  });
+  const messages = listResponse.data.messages || [];
 
   for (const message of messages) {
     const fullMessage = await gmailClient.users.messages.get({
@@ -33,7 +50,7 @@ export default async function syncEmail(userId: string) {
     );
 
     // Upserting RAW data into emailData schema
-    const emailUpsert = await prisma.emailData.upsert({
+    await prisma.emailData.upsert({
       where: { gmailId: fullMessage.data.id! },
       update: {
         snippet: decodedBase64 || "",
@@ -73,7 +90,7 @@ export default async function syncEmail(userId: string) {
           interviewDate: interviewDate,
           status: gmailExtractor.status,
           location: gmailExtractor.location,
-          interviewType: gmailExtractor.interview?.type
+          interviewType: gmailExtractor.interview?.type,
         },
         create: {
           emailId: fullMessage.data.id!,
@@ -90,5 +107,16 @@ export default async function syncEmail(userId: string) {
         },
       });
     }
+
+    
   }
+  // Sync update
+
+    await prisma.user.update({
+      where:{id: userId},
+      data:{
+        lastSyncedAt: new Date()
+      }
+    })
+  
 }

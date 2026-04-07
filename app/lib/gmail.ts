@@ -3,25 +3,26 @@ import { prisma } from "./prisma";
 
 export default async function getGmailClient(userId: string) {
   const account = await prisma.account.findFirst({
-    where: { userId: userId, provider: "google" },
+    where: { userId, provider: "google" },
   });
 
-  if (!account || !account.access_token) {
-    throw new Error("No google account found for this account");
+  if (!account || !account.refresh_token) {
+    throw new Error("No Google account / refresh token found");
   }
 
   const auth = new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID,
-    process.env.GOOGLE_CLIENT_SECRET,
+    process.env.GOOGLE_CLIENT_SECRET
   );
+
   auth.setCredentials({
-    access_token: account.access_token,
+    access_token: account.access_token ?? undefined,
     refresh_token: account.refresh_token,
   });
 
-  const currentDate = Math.floor(Date.now() / 1000);
+  const nowInSeconds = Math.floor(Date.now() / 1000);
 
-  if (!account?.expires_at || account?.expires_at - currentDate < 60) {
+  if (!account.expires_at || account.expires_at - nowInSeconds < 60) {
     const { credentials } = await auth.refreshAccessToken();
 
     await prisma.account.update({
@@ -34,10 +35,11 @@ export default async function getGmailClient(userId: string) {
         refresh_token: credentials.refresh_token ?? account.refresh_token,
       },
     });
+
     auth.setCredentials({
-        access_token:credentials.access_token ?? account.access_token ?? undefined,
-        refresh_token: credentials.refresh_token ?? account.refresh_token
-    })
+      access_token: credentials.access_token ?? account.access_token ?? undefined,
+      refresh_token: credentials.refresh_token ?? account.refresh_token,
+    });
   }
 
   return google.gmail({ version: "v1", auth });
