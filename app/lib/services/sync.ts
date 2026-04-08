@@ -16,7 +16,7 @@ export default async function syncEmail(userId: string) {
     const lastSyncedInSeconds = Math.floor(
       userQuery.lastSyncedAt.getTime() / 1000,
     );
-    maxResultsQuery = 20;
+    maxResultsQuery = 10;
     query = `after:${lastSyncedInSeconds} in:inbox`;
   } else {
     maxResultsQuery = 10;
@@ -107,16 +107,12 @@ export default async function syncEmail(userId: string) {
         },
       });
     }
-
-    
   }
   // Sync update
-
-    await prisma.user.update({
-      where:{id: userId},
-      data:{
-        lastSyncedAt: new Date()
-      }
-    })
-  
+  await prisma.user.update({
+    where: { id: userId },
+    data: {
+      lastSyncedAt: new Date(),
+    },
+  });
 }

@@ -1,9 +1,10 @@
+import { prisma } from "@/app/lib/prisma";
 import syncEmail from "@/app/lib/services/sync";
 import { auth } from "@/auth";
 
 export async function POST() {
   const session = await auth();
-  console.log(session)
+
   if (!session) {
     return new Response("Session Expired", {
       status: 401,
@@ -21,4 +22,21 @@ export async function POST() {
       status: 500,
     });
   }
+}
+
+export async function GET() {
+  const session = await auth();
+  if (!session) {
+    return new Response("Session Expired", {
+      status: 401,
+    });
+  }
+
+  const user = await prisma.user.findUnique({
+    where:{id: session.user.id},
+  })
+
+  return Response.json({
+    lastSyncedAt: user?.lastSyncedAt,
+  })
 }
