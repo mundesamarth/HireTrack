@@ -14,8 +14,14 @@ export async function POST() {
     const sessionUser = session.user.id;
 
     await syncEmail(sessionUser);
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+    });
 
-    return Response.json("Syncing done");
+    return Response.json({
+      message: "Syncing Done",
+      lastSyncedAt: user?.lastSyncedAt
+    });
   } catch (error) {
     console.log(error);
     return new Response(`Something went wrong`, {
@@ -23,6 +29,9 @@ export async function POST() {
     });
   }
 }
+
+
+
 
 export async function GET() {
   const session = await auth();

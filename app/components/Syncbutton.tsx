@@ -1,62 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, formatSyncTime } from "@/lib/utils";
 import { Mail, RefreshCcw } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Syncbutton() {
   const [loading, setLoading] = useState(false);
   const [syncTime, setSyncTime] = useState<string | null>(null);
-
-  // Date Helper function
-  function formatSyncTime(time: string | null ) {
-    if (!time) {
-      return "Never Synced";
-    } else {
-      const currentTime = new Date();
-      const syncedTime = new Date(time);
-
-      const timeInMilsecond = currentTime.getTime() - syncedTime.getTime();
-      const minutes = timeInMilsecond / 60000;
-      const hours = minutes / 60;
-      const days = hours / 24
-
-      if(minutes < 60){
-        const floorMinutes = Math.floor(minutes)
-        if(floorMinutes === 0){
-          return "Just now"
-        }else if(floorMinutes === 1){
-          return `${floorMinutes} min ago`
-
-        }else{
-          return `${floorMinutes} mins ago`
-        }
-      }else if(hours < 24) {
-        
-        const floorHours = Math.floor(hours)
-        if(floorHours === 1){
-        return `${floorHours} hour ago`
-
-        }else{
-
-          return `${floorHours} hours ago`
-        }
-      }else {
-        const floorDays = Math.floor(days)
-        if(floorDays === 1){
-        return `${floorDays} day ago`
-
-        }else{
-
-          return `${floorDays} days ago`
-        }
-      }
-    }
-  }
-
   useEffect(() => {
     async function loadSyncTime() {
       try {
-        const res = await fetch("/api/sync", { method: "GET" });
+        const res = await fetch("/api/sync");
         const data = await res.json();
 
         setSyncTime(data.lastSyncedAt);
@@ -67,12 +20,13 @@ export default function Syncbutton() {
     loadSyncTime();
   }, []);
 
+
+  // Manual Function
   async function callSync() {
     try {
       setLoading(true);
-      await fetch("/api/sync", { method: "POST" });
 
-      const res = await fetch("/api/sync");
+      const res = await fetch("/api/sync", { method: "POST" });
       const data = await res.json();
 
       setSyncTime(data.lastSyncedAt);
