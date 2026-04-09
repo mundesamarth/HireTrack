@@ -1,7 +1,19 @@
 import { cn } from "@/lib/utils";
 import KanbanContent from "./KanbanContent";
+ type Status = "APPLIED" | "INTERVIEW" | "REJECTED" | "OFFER";
 
-export default function KanbanSection() {
+  type applicationType = {
+    companyName: string;
+    positionTitle: string;
+    status: Status;
+    interviewType: string;
+    interviewDate: string;
+  };
+export default function KanbanSection({
+  applicationContent,
+}: {
+  applicationContent: applicationType[];
+}) {
  
 
   return (
@@ -20,7 +32,7 @@ export default function KanbanSection() {
       </div>
       {/* KanBan Section */}
       <div className="lg:overflow-x-auto scrollbar">
-        <KanbanContent/>
+        <KanbanContent applicationContent={applicationContent}/>
       </div>
     </div>
   );

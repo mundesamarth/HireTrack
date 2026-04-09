@@ -23,7 +23,7 @@ export async function extractJobDetails(text: any) {
           "location": string,
           "interview": { "date": string, "time": string, "type": "remote" | "onsite" | null } | null,
         }
-        Use ISO 8601 for dates. If info is missing, use null. `,
+        Use ISO 8601 for dates. If info is missing, use null. When the status = APPLIED, get the date on which user has applied for this position and if status = REJECTED , get the date on which user got rejected`,
         responseMimeType: "application/json",
       },
     });

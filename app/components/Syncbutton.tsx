@@ -1,9 +1,12 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { cn, formatSyncTime } from "@/lib/utils";
 import { Mail, RefreshCcw } from "lucide-react";
 import { useEffect, useState } from "react";
+import { applicationType, Props } from "@/app/lib/types";
 
-export default function Syncbutton() {
+
+export default function Syncbutton({fetchData}:Props) {
   const [loading, setLoading] = useState(false);
   const [syncTime, setSyncTime] = useState<string | null>(null);
   useEffect(() => {
@@ -13,13 +16,14 @@ export default function Syncbutton() {
         const data = await res.json();
 
         setSyncTime(data.lastSyncedAt);
+        
+        // setApplicationContent(apps);
       } catch (error) {
         console.log("Something broke at loadSyncTime Function ");
       }
     }
     loadSyncTime();
   }, []);
-
 
   // Manual Function
   async function callSync() {
@@ -30,6 +34,7 @@ export default function Syncbutton() {
       const data = await res.json();
 
       setSyncTime(data.lastSyncedAt);
+      await fetchData();
     } catch (error) {
       console.log("Something went wrong at callSync function");
     } finally {

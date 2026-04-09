@@ -14,6 +14,7 @@ export async function POST() {
     const sessionUser = session.user.id;
 
     await syncEmail(sessionUser);
+//    
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
     });

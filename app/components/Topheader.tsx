@@ -5,8 +5,9 @@ import { Search } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Searchbar from "./Searchbar";
 import Syncbutton from "./Syncbutton";
+import { applicationType, Props } from "@/app/lib/types";
 
-export default function TopheaderSection() {
+export default function TopheaderSection({fetchData}:Props) {
   const pathname = usePathname();
 
   const headingLabel = [
@@ -56,7 +57,7 @@ export default function TopheaderSection() {
             <Searchbar />
           </div>
           {/* Sync Button */}
-          <Syncbutton />
+          <Syncbutton fetchData={fetchData}/>
         </div>
       </div>
 
