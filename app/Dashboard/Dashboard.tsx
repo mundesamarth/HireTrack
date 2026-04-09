@@ -25,7 +25,7 @@ export default function Dashboard() {
   return (
     <div className="min-w-0">
       <TopheaderSection fetchData={fetchData} />
-      <TopmetricsSection />
+      <TopmetricsSection applicationContent={applicationContent} />
       <MetricsSection applicationContent={applicationContent} />
       <KanbanSection applicationContent={applicationContent} />
     </div>
