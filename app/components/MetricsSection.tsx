@@ -1,60 +1,41 @@
-// 7. 
-
-// This is the summary area with:
-// - Total Applications
-// - Active Interviews
-// - Offers / Rejections
-
-// ### Grid
-// - Mobile: stacked
-// - Desktop: 3-column grid
-
-// ### Card Container
-// - Background: primary surface
-// - Border: `1px solid --border`
-// - Radius: `12px`
-// - Shadow: shared raised surface
-// - Padding: `20px`
-
-// ### Internal Content
-// - Label: `14px`
-// - Metric number: `30px`, `600`
-// - Supporting note/footer: `14px`
-
-// ### Card Spacing
-// - Gap between metric cards: `16px` to `20px`
-// - Gap above board section: `32px`
-
-// ### Active Interviews Card
-// - Includes pulsing green dot
-// - Dot is the only “live” visual cue in metrics
-// - Accent should stay restrained, not neon
-
-// ### Design Rules
-// - Metrics should look like product stats, not marketing KPIs
-// - Emphasis comes from typography and spacing, not heavy color fills
-
 import { cn } from "@/lib/utils";
 import { BriefcaseBusiness, CalendarClock, Sparkles } from "lucide-react";
+import { applicationType } from "../lib/types";
+type Props = {
+  applicationContent: applicationType[];
+};
 
-export default function MetricsSection() {
+export default function MetricsSection({ applicationContent }: Props) {
+  const interviews = applicationContent.filter(
+    (app) => app.status === "INTERVIEW",
+  ).length;
+  const offersCount = applicationContent.filter(
+    (app) => app.status === "OFFER",
+  ).length;
+  const rejectionCount = applicationContent.filter(
+    (app) => app.status === "REJECTED",
+  ).length;
+
+
+const result = `${offersCount}/${rejectionCount}`;
+
   const metricsContent = [
     {
       heading: "Total Applications",
-      number: "52",
+      number: applicationContent.length,
       subHeading: "waiting on response",
       icon: BriefcaseBusiness,
     },
     {
       label: true,
       heading: "Active interviews",
-      number: "14",
+      number: interviews,
       subHeading: "loops in progress",
       icon: CalendarClock,
     },
     {
       heading: "Offeres/ Rejection",
-      number: "4/9",
+      number: result,
       subHeading: "resolved outcomes",
       icon: Sparkles,
     },

@@ -5,17 +5,10 @@ import MetricsSection from "../components/MetricsSection";
 import TopheaderSection from "../components/Topheader";
 import TopmetricsSection from "../components/TopmetricsSection";
 import { loadApplication } from "@/lib/utils";
-
+import { applicationType } from "../lib/types";
 export default function Dashboard() {
-  type Status = "APPLIED" | "INTERVIEW" | "REJECTED" | "OFFER";
 
-  type applicationType = {
-    companyName: string;
-    positionTitle: string;
-    status: Status;
-    interviewType: string;
-    interviewDate: string;
-  };
+  
   const [applicationContent, setApplicationContent] = useState<
     applicationType[]
   >([]);
@@ -33,7 +26,7 @@ export default function Dashboard() {
     <div className="min-w-0">
       <TopheaderSection fetchData={fetchData} />
       <TopmetricsSection />
-      <MetricsSection />
+      <MetricsSection applicationContent={applicationContent} />
       <KanbanSection applicationContent={applicationContent} />
     </div>
   );

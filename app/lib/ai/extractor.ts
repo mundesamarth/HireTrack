@@ -15,15 +15,38 @@ export async function extractJobDetails(text: any) {
       model: "gemini-2.5-flash-lite",
       contents: text,
       config: {
-        systemInstruction: `Extract job application data. Return ONLY JSON. ONLY use the provided text, do not invent data:
-        {
-          "company": string,
-          "role": string,
-          "status": "APPLIED" | "INTERVIEW" | "REJECTED" | "OFFER" | "OTHER",
-          "location": string,
-          "interview": { "date": string, "time": string, "type": "remote" | "onsite" | null } | null,
-        }
-        Use ISO 8601 for dates. If info is missing, use null. When the status = APPLIED, get the date on which user has applied for this position and if status = REJECTED , get the date on which user got rejected`,
+        systemInstruction: `Extract job application data from the provided email text. Return ONLY valid JSON. Do not add markdown, commentary, or extra text. Do not guess or invent missing information.
+
+Schema:
+{
+  "company": string | null,
+  "role": string | null,
+  "status": "APPLIED" | "INTERVIEW" | "REJECTED" | "OFFER" ,
+  "location": string | null,
+  "interview": {
+    "date": string | null,
+    "time": string | null,
+    "type": "remote" | "onsite" | "hybrid" | null
+  } | null
+}
+
+Rules:
+- Use only information explicitly supported by the email text.
+- If a field is missing, unclear, or not explicitly stated, return null.
+- If the email is not clearly about a job application or hiring process, return status as "OTHER" and set all other fields to null.
+- Normalize status strictly to one of:
+  - "APPLIED" → application received, submitted, under review, thank you for applying
+  - "INTERVIEW" → screening, interview invite, scheduling, next round, assessment tied to interview stage
+  - "REJECTED" → rejection, declined, not moving forward
+  - "OFFER" → offer, offer letter, compensation/package discussion clearly indicating offer stage
+  - "OTHER" → anything else
+- Normalize interview.type strictly to one of: "remote", "onsite", "hybrid", or null.
+- For interview.date, use format YYYY-MM-DD only.
+- For interview.time, use format HH:mm (24-hour) only.
+- Only populate the interview object if the email clearly refers to an interview or interview-related step. Otherwise return null.
+- Do not infer an application date or rejection date unless the email explicitly states it.
+- If multiple roles or companies are mentioned, choose the primary one the email is about.
+- If company or role cannot be confidently determined, return null for that field.`,
         responseMimeType: "application/json",
       },
     });
