@@ -1,3 +1,4 @@
+import { kanbanTimeConversion } from "@/lib/utils";
 import { CalendarClock } from "lucide-react";
 
   type Status = "APPLIED" | "INTERVIEW" | "REJECTED" | "OFFER";
@@ -36,7 +37,7 @@ export default function KanbanScrollSection({
             <p className="text-sm text-foreground-3">Next event</p>
             <p className="mt-2.5 text-sm text-foreground-2 font-medium flex items-center gap-2 ">
                 <CalendarClock className="w-4 h-4"/>
-                {app.interviewDate}</p>
+                {kanbanTimeConversion(app.interviewDate)}</p>
           </div>
           <div className="flex justify-between text-sm border-t border-border px-4 py-3">
             <div>

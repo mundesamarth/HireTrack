@@ -27,7 +27,7 @@ export default function KanbanSection({
           </p>
         </div>
         <div>
-          <p className="text-foreground-3 text-sm">52 visible roles</p>
+          <p className="text-foreground-3 text-sm">{applicationContent.length} visible roles</p>
         </div>
       </div>
       {/* KanBan Section */}

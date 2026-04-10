@@ -5,13 +5,14 @@ import MetricsSection from "../components/MetricsSection";
 import TopheaderSection from "../components/Topheader";
 import TopmetricsSection from "../components/TopmetricsSection";
 import { loadApplication } from "@/lib/utils";
-import { applicationType } from "../lib/types";
+import { applicationType, searchProps } from "../lib/types";
 
 export default function Dashboard() {
   const [applicationContent, setApplicationContent] = useState<
     applicationType[]
   >([]);
 
+  const [searchTerm, setSearchTerm] = useState<string>("");
   async function fetchData() {
     const app = await loadApplication();
     setApplicationContent(app);
@@ -21,13 +22,25 @@ export default function Dashboard() {
     fetchData();
   }, []);
 
+  const lowerSearchTerm = searchTerm.toLowerCase()
+  const filteredApplication = applicationContent.filter(
+
+    (s) =>
+      (s.companyName || "").toLowerCase().includes(lowerSearchTerm) ||
+      (s.status || "").toLowerCase().includes(lowerSearchTerm)  ||
+      (s.positionTitle || "").toLowerCase().includes(lowerSearchTerm) ,
+  );
+
   return (
     <div className="min-w-0">
-
-      <TopheaderSection fetchData={fetchData} />
+      <TopheaderSection
+        fetchData={fetchData}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
       <TopmetricsSection applicationContent={applicationContent} />
-      <MetricsSection applicationContent={applicationContent} />
-      <KanbanSection applicationContent={applicationContent} />
+      <MetricsSection applicationContent={filteredApplication} />
+      <KanbanSection applicationContent={filteredApplication} />
     </div>
   );
 }

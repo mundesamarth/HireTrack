@@ -10,4 +10,12 @@ export type applicationType = {
 
 export type Props = {
   fetchData: () => Promise<void>;
+ 
+
 };
+
+
+export type searchProps = {
+  searchTerm: string
+setSearchTerm: React.Dispatch<React.SetStateAction<string>>
+}

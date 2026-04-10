@@ -44,6 +44,21 @@ export function formatSyncTime(time: string | null) {
   }
 }
 
+export function kanbanTimeConversion(time: string | null) {
+  if (!time) {
+    return "------";
+  } else {
+    return new Date(time).toLocaleString("en-GB", {
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+
+  }
+}
+
 export async function loadApplication() {
   try {
     const res = await fetch("/api/applications/");

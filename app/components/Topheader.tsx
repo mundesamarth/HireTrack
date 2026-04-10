@@ -5,9 +5,9 @@ import { Search } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Searchbar from "./Searchbar";
 import Syncbutton from "./Syncbutton";
-import { applicationType, Props } from "@/app/lib/types";
+import { applicationType, Props,searchProps } from "@/app/lib/types";
 
-export default function TopheaderSection({fetchData}:Props) {
+export default function TopheaderSection({fetchData, searchTerm, setSearchTerm}:Props & searchProps) {
   const pathname = usePathname();
 
   const headingLabel = [
@@ -54,10 +54,10 @@ export default function TopheaderSection({fetchData}:Props) {
         <div className="flex gap-4 min-h-[52px] sm:flex-row flex-col ">
           {/* Search Bar */}
           <div className="md:w-full ">
-            <Searchbar />
+            <Searchbar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
           </div>
           {/* Sync Button */}
-          <Syncbutton fetchData={fetchData}/>
+          <Syncbutton fetchData={fetchData} />
         </div>
       </div>
 
