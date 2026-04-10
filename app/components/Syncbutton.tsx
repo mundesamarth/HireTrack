@@ -1,12 +1,12 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
 import { cn, formatSyncTime } from "@/lib/utils";
 import { Mail, RefreshCcw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { applicationType, Props } from "@/app/lib/types";
+import { GooeyToaster, gooeyToast } from "goey-toast";
 
-
-export default function Syncbutton({fetchData}:Props) {
+export default function Syncbutton({ fetchData }: Props) {
   const [loading, setLoading] = useState(false);
   const [syncTime, setSyncTime] = useState<string | null>(null);
   useEffect(() => {
@@ -16,6 +16,7 @@ export default function Syncbutton({fetchData}:Props) {
         const data = await res.json();
 
         setSyncTime(data.lastSyncedAt);
+
         
         // setApplicationContent(apps);
       } catch (error) {
@@ -35,8 +36,16 @@ export default function Syncbutton({fetchData}:Props) {
 
       setSyncTime(data.lastSyncedAt);
       await fetchData();
+      gooeyToast.success("Synced Successfully", {
+          description: "New Job applications have been synced.",
+          preset: 'smooth',
+        });
     } catch (error) {
       console.log("Something went wrong at callSync function");
+      gooeyToast.error("Something went wrong", {
+        description: "Try again later.",
+        preset: 'smooth'
+      })
     } finally {
       setLoading(false);
     }
@@ -73,6 +82,7 @@ export default function Syncbutton({fetchData}:Props) {
                 loading ? "[animation:spin_1s_linear_infinite_reverse]" : "",
               )}
             />
+
             {loading ? "Syncing.." : "Sync Gmail"}
           </Button>
         </div>

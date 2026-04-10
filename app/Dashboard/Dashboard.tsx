@@ -6,9 +6,8 @@ import TopheaderSection from "../components/Topheader";
 import TopmetricsSection from "../components/TopmetricsSection";
 import { loadApplication } from "@/lib/utils";
 import { applicationType } from "../lib/types";
-export default function Dashboard() {
 
-  
+export default function Dashboard() {
   const [applicationContent, setApplicationContent] = useState<
     applicationType[]
   >([]);
@@ -16,7 +15,7 @@ export default function Dashboard() {
   async function fetchData() {
     const app = await loadApplication();
     setApplicationContent(app);
-    console.log(app.length)
+    console.log(app.length);
   }
   useEffect(() => {
     fetchData();
@@ -24,6 +23,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-w-0">
+
       <TopheaderSection fetchData={fetchData} />
       <TopmetricsSection applicationContent={applicationContent} />
       <MetricsSection applicationContent={applicationContent} />
