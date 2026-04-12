@@ -35,23 +35,25 @@ export default function TopmetricsSection({ applicationContent }: Props) {
     },
   ];
   return (
-    <div className="text-foreground-1 flex gap-3 mt-5">
+    <div className="text-foreground-1 flex gap-3 mt-5" >
       {filterArea.map(({ label, number, badge }) => (
         <div
           key={label}
           className="bg-surface h-[40px] flex items-center justify-center gap-3 px-[14px] rounded-[10px] border border-border text-foreground-3 text-sm font-medium bg-raised-shadow"
+          // onClick={}
         >
           <div className="">{label}</div>
           <div
             className={cn(
               "ml-1 inline-flex items-center rounded-[8px] border px-2.5 py-1 text-xs font-medium",
               badge,
-            )}
+            )
+          }
           >
             {number}
           </div>
         </div>
-      ))}
+      )) }
     </div>
   );
 }

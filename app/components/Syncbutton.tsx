@@ -73,8 +73,11 @@ export default function Syncbutton({ fetchData }: Props) {
         {/* Right */}
         <div>
           <Button
-            className="!rounded-[12px] text-background bg-foreground-1 text-sm py-4 hover:opacity-92 font-medium ml-auto shrink-0 cursor-pointer  !px-4"
+            className={cn("!rounded-[12px] text-background bg-foreground-1 text-sm py-4 hover:opacity-92 font-medium ml-auto shrink-0 cursor-pointer  !px-4")
+            }
+            disabled={loading}
             onClick={callSync}
+
           >
             <RefreshCcw
               className={cn(

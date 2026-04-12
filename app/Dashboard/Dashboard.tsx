@@ -5,7 +5,7 @@ import MetricsSection from "../components/MetricsSection";
 import TopheaderSection from "../components/Topheader";
 import TopmetricsSection from "../components/TopmetricsSection";
 import { loadApplication } from "@/lib/utils";
-import { applicationType, searchProps } from "../lib/types";
+import { applicationType } from "../lib/types";
 
 export default function Dashboard() {
   const [applicationContent, setApplicationContent] = useState<
@@ -38,7 +38,7 @@ export default function Dashboard() {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
       />
-      <TopmetricsSection applicationContent={applicationContent} />
+      <TopmetricsSection applicationContent={filteredApplication} />
       <MetricsSection applicationContent={filteredApplication} />
       <KanbanSection applicationContent={filteredApplication} />
     </div>

@@ -1,21 +1,15 @@
 "use client";
 import { cn } from "@/lib/utils";
 import KanbanScrollSection from "./KanbanScrollableSection";
+import { applicationType } from "@/app/lib/types";
 
- type Status = "APPLIED" | "INTERVIEW" | "REJECTED" | "OFFER";
 
-  type applicationType = {
-    companyName: string;
-    positionTitle: string;
-    status: Status;
-    interviewType: string;
-    interviewDate: string;
-  };
+ type Props = {
+   applicationContent: applicationType[];
+ };
 export default function KanbanContent({
   applicationContent,
-}: {
-  applicationContent: applicationType[];
-}) {
+}: Props) {
   const headingContent: {
     label: Status;
     badge: string;

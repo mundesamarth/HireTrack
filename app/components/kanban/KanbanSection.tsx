@@ -1,19 +1,12 @@
 import { cn } from "@/lib/utils";
 import KanbanContent from "./KanbanContent";
- type Status = "APPLIED" | "INTERVIEW" | "REJECTED" | "OFFER";
-
-  type applicationType = {
-    companyName: string;
-    positionTitle: string;
-    status: Status;
-    interviewType: string;
-    interviewDate: string;
-  };
+import { applicationType } from "@/app/lib/types";
+type Props = {
+  applicationContent: applicationType[];
+};
 export default function KanbanSection({
   applicationContent,
-}: {
-  applicationContent: applicationType[];
-}) {
+}:Props) {
  
 
   return (
