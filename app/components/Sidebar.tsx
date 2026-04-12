@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import AddJobButton from "./AddJobButton";
 
 export default function Sidebar() {
   const navigation = [
@@ -103,7 +104,7 @@ export default function Sidebar() {
             </Link>
           ))}
         </nav>
-
+          <AddJobButton />
         {/* Bottom box */}
         <div className="mt-9">
           <div
