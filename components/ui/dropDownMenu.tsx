@@ -29,15 +29,16 @@ export default function SelectDropdown({
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className="text-foreground-1 w-full bg-surface border border-border focus-visible:ring-0 h-12">
+          <Button className="text-foreground-1 w-full bg-surface border border-border h-12 ">
             {value || placeholder}
             {(!value || value === placeholder) && <ChevronDown />}
           </Button>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent className="z-[90] bg-foreground-1">
+        <DropdownMenuContent className="z-[70] bg-surface text-foreground-1 ">
           {options.map((opt) => (
             <DropdownMenuItem
+            className="flex items-center text-foreground-1 justify-center hover:bg-foreground-1 text-foreground-3 text-md hover:cursor-pointer"
               key={opt.id}
               onClick={() => {
                 setValue(opt.label);

@@ -1,5 +1,4 @@
 
-import { Button } from "@/components/ui/button";
 import ModalForm from "./ModalForm";
 
 type Props = {
@@ -21,19 +20,7 @@ export default function AddJobModal({ isModalOpen, setIsModalOpen }: Props) {
       >
         <ModalForm setIsModalOpen={setIsModalOpen} />
 
-        <div className="pt-10 flex justify-end gap-4">
-          <Button
-            className="px-9 py-6 text-foreground-1 bg-surface border border-border cursor-pointer hover:bg-surface-muted"
-            onClick={() => {
-              setIsModalOpen(false);
-            }}
-          >
-            Cancel
-          </Button>
-          <Button className="px-10 py-6 bg-foreground-1 text-background cursor-pointer hover:bg-foreground-2 font-[700]">
-            + Add Job
-          </Button>
-        </div>
+       
       </div>
     </div>
   );

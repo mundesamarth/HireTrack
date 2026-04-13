@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./components/Sidebar";
 import AddJobModal from "./components/addModal";
+import ClientShell from "./ClientShell";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,16 +31,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex h-screen overflow-hidden">
-          <Sidebar />
-          <div className="flex-1 min-w-0">
-            <div className="h-full overflow-y-auto overflow-x-hidden scrollbar">
-              <div className="mx-auto w-full px-8">
-                {children}
-              </div>
-            </div>
-          </div>
-        </div>
+        <ClientShell>
+          {children}
+        </ClientShell>
       </body>
     </html>
   );

@@ -10,19 +10,44 @@ import {
 } from "@/components/ui/field";
 import DatePickerTime from "@/components/ui/datePicker";
 import SelectDropdown from "@/components/ui/dropDownMenu";
-import { useState } from "react";
-type Props = {
-    setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { useForm, SubmitHandler } from "react-hook-form";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
 
-export default function ModalForm({setIsModalOpen}:Props) {
-  const [workMode, setWorkMode] = useState("");
+type Props = {
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const formSchema = z.object({
+  companyName: z.string().min(4),
+  position: z.string().min(4),
+  location: z.string(),
+  workMode: z.string(),
+  stage: z.string(),
+  interviewDate: z.string(),
+});
+
+type Inputs = z.infer<typeof formSchema>;
+
+export default function ModalForm({ setIsModalOpen }: Props) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    setValue,
+  } = useForm<Inputs>({
+    resolver: zodResolver(formSchema),
+  });
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
   const workOption = [
     { id: 1, label: "Remote" },
     { id: 2, label: "Hybrid" },
     { id: 3, label: "Onsite" },
   ];
-  const [stageMode, setStageMode] = useState("");
 
   const stageOptions = [
     { id: 1, label: "Applied" },
@@ -34,7 +59,8 @@ export default function ModalForm({setIsModalOpen}:Props) {
   const inputStyle =
     "border border-border focus:border focus:border-border focus:outline-none placeholder:text-foreground-3 focus-visible:ring-0 h-12";
   return (
-    <form action="">
+   <div>
+     <form onSubmit={handleSubmit(onSubmit)}>
       <FieldGroup>
         <FieldSet>
           <div className="flex justify-between border-b border-border pb-5">
@@ -57,7 +83,11 @@ export default function ModalForm({setIsModalOpen}:Props) {
               <div className="flex gap-6 pb-3 ">
                 <Field className="">
                   <FieldLabel>Company Name</FieldLabel>
-                  <Input placeholder="Google" className={inputStyle} />
+                  <Input
+                    placeholder="Google"
+                    className={inputStyle}
+                    {...register("companyName")}
+                  />
                 </Field>
 
                 <Field>
@@ -65,26 +95,30 @@ export default function ModalForm({setIsModalOpen}:Props) {
                   <Input
                     placeholder="Software Engineer"
                     className={inputStyle}
+                    {...register("position")}
                   />
                 </Field>
               </div>
               <div className="flex gap-3 pb-3">
                 <Field className="">
                   <FieldLabel>Next Event</FieldLabel>
-                  <DatePickerTime />
+                  <DatePickerTime 
+                  value={watch("interviewDate")}
+                  setValue={(val) => setValue("interviewDate", val)}
+                    />
                 </Field>
 
                 <Field>
                   <FieldLabel>Location</FieldLabel>
-                  <Input placeholder="London" className={inputStyle} />
+                  <Input placeholder="London" className={inputStyle} {...register("location")}/>
                 </Field>
               </div>
               <div className="flex gap-6 pb-3 ">
                 <Field className="">
                   <FieldLabel>Work Mode</FieldLabel>
                   <SelectDropdown
-                    value={workMode}
-                    setValue={setWorkMode}
+                    value={watch("workMode")}
+                    setValue={(val) => setValue("workMode", val)}
                     options={workOption}
                     placeholder="Select Work Mode"
                   />
@@ -93,8 +127,8 @@ export default function ModalForm({setIsModalOpen}:Props) {
                 <Field>
                   <FieldLabel>Stage</FieldLabel>
                   <SelectDropdown
-                    value={stageMode}
-                    setValue={setStageMode}
+                    value={watch("stage")}
+                    setValue={(val) => setValue("stage", val)}
                     options={stageOptions}
                     placeholder="Select Stage"
                   />
@@ -104,6 +138,21 @@ export default function ModalForm({setIsModalOpen}:Props) {
           </div>
         </FieldSet>
       </FieldGroup>
+      <div className="pt-10 flex justify-end gap-4">
+          <Button
+            className="px-9 py-6 text-foreground-1 bg-surface border border-border cursor-pointer hover:bg-surface-muted"
+            onClick={() => {
+              setIsModalOpen(false);
+            }}
+          >
+            Cancel
+          </Button>
+          <Button className="px-10 py-6 bg-foreground-1 text-background cursor-pointer hover:bg-foreground-2 font-[700]" type="submit">
+            + Add Job
+          </Button>
+        </div>
     </form>
+     
+   </div>
   );
 }

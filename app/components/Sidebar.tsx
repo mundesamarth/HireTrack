@@ -13,7 +13,9 @@ import Link from "next/link";
 import { useState } from "react";
 import AddJobButton from "./AddJobButton";
 
-export default function Sidebar() {
+export default function Sidebar({setIsModalOpen}:{
+  setIsModalOpen: (value: boolean) => void;
+}) {
   const navigation = [
     { href: "/", label: "Dashboard", icon: PanelsTopLeft },
     { href: "/applications", label: "Applications", icon: ClipboardList },
@@ -104,7 +106,7 @@ export default function Sidebar() {
             </Link>
           ))}
         </nav>
-          <AddJobButton isCollapsed={isCollapsed}/>
+          <AddJobButton isCollapsed={isCollapsed} setIsModalOpen={setIsModalOpen}/>
         {/* Bottom box */}
         <div className="mt-9">
           <div
