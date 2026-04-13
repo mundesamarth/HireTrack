@@ -13,13 +13,5 @@ export default function Home() {
 
       <Dashboard />
     </div>
-    // <div className="flex items-center justify-center h-40 bg-background ">
-    //   <Button className="p-10 bg-secondary text-foreground-3 text-2xl">
-    //     <Link href="api/auth/signin"> Google Sign In</Link>
-    //   </Button>
-    //       <Button className="p-10 bg-secondary text-foreground-3 text-2xl ">
-    //     <Link href="/api/google"> Check Gmail</Link>
-    //   </Button>
-    // </div>
   );
 }

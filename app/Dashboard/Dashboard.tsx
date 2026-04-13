@@ -6,11 +6,14 @@ import TopheaderSection from "../components/Topheader";
 import TopmetricsSection from "../components/TopmetricsSection";
 import { loadApplication } from "@/lib/utils";
 import { applicationType } from "../lib/types";
+import AddJobModal from "../components/addModal";
+import Sidebar from "../components/Sidebar";
 
 export default function Dashboard() {
   const [applicationContent, setApplicationContent] = useState<
     applicationType[]
   >([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState<string>("");
   async function fetchData() {
@@ -33,6 +36,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-w-0">
+
       <TopheaderSection
         fetchData={fetchData}
         searchTerm={searchTerm}
@@ -41,6 +45,10 @@ export default function Dashboard() {
       <TopmetricsSection applicationContent={filteredApplication} />
       <MetricsSection applicationContent={filteredApplication} />
       <KanbanSection applicationContent={filteredApplication} />
+       <AddJobModal
+                  isModalOpen={isModalOpen}
+                  setIsModalOpen={setIsModalOpen}
+                />
     </div>
   );
 }

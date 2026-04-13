@@ -1,9 +1,8 @@
-
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./components/Sidebar";
-
+import AddJobModal from "./components/addModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +24,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <body
@@ -35,7 +35,6 @@ export default function RootLayout({
           <div className="flex-1 min-w-0">
             <div className="h-full overflow-y-auto overflow-x-hidden scrollbar">
               <div className="mx-auto w-full px-8">
-
                 {children}
               </div>
             </div>

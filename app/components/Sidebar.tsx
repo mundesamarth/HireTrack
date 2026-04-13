@@ -104,7 +104,7 @@ export default function Sidebar() {
             </Link>
           ))}
         </nav>
-          <AddJobButton />
+          <AddJobButton isCollapsed={isCollapsed}/>
         {/* Bottom box */}
         <div className="mt-9">
           <div
