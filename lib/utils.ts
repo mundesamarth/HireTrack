@@ -61,7 +61,9 @@ export function kanbanTimeConversion(time: string | null) {
 
 export async function loadApplication() {
   try {
-    const res = await fetch("/api/applications/");
+    const res = await fetch("/api/applications/",{
+      cache: "no-store"
+    });
     const data = await res.json();
 
     return data.applications;

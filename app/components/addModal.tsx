@@ -4,9 +4,11 @@ import ModalForm from "./ModalForm";
 type Props = {
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  fetchData: () => Promise<void>;
+
 };
 
-export default function AddJobModal({ isModalOpen, setIsModalOpen }: Props) {
+export default function AddJobModal({ isModalOpen, setIsModalOpen, fetchData }: Props) {
   if (!isModalOpen) return null;
 
   return (
@@ -18,7 +20,7 @@ export default function AddJobModal({ isModalOpen, setIsModalOpen }: Props) {
         className="relative max-h-full w-full max-w-2xl overflow-y-auto rounded-[12px] border border-border bg-surface p-5 text-foreground-1 z-[60]"
         onClick={(e) => e.stopPropagation()}
       >
-        <ModalForm setIsModalOpen={setIsModalOpen} />
+        <ModalForm setIsModalOpen={setIsModalOpen} fetchData={fetchData} />
 
        
       </div>

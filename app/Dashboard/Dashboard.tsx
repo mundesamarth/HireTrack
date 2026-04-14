@@ -25,18 +25,16 @@ export default function Dashboard() {
     fetchData();
   }, []);
 
-  const lowerSearchTerm = searchTerm.toLowerCase()
+  const lowerSearchTerm = searchTerm.toLowerCase();
   const filteredApplication = applicationContent.filter(
-
     (s) =>
       (s.companyName || "").toLowerCase().includes(lowerSearchTerm) ||
-      (s.status || "").toLowerCase().includes(lowerSearchTerm)  ||
-      (s.positionTitle || "").toLowerCase().includes(lowerSearchTerm) ,
+      (s.status || "").toLowerCase().includes(lowerSearchTerm) ||
+      (s.positionTitle || "").toLowerCase().includes(lowerSearchTerm),
   );
 
   return (
     <div className="min-w-0">
-
       <TopheaderSection
         fetchData={fetchData}
         searchTerm={searchTerm}
@@ -45,10 +43,11 @@ export default function Dashboard() {
       <TopmetricsSection applicationContent={filteredApplication} />
       <MetricsSection applicationContent={filteredApplication} />
       <KanbanSection applicationContent={filteredApplication} />
-       <AddJobModal
-                  isModalOpen={isModalOpen}
-                  setIsModalOpen={setIsModalOpen}
-                />
+      <AddJobModal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        fetchData={fetchData}
+      />
     </div>
   );
 }

@@ -10,8 +10,6 @@ export type applicationType = {
 
 export type Props = {
   fetchData: () => Promise<void>;
- 
-
 };
 
 

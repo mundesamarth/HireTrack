@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { cn, formatSyncTime } from "@/lib/utils";
 import { Mail, RefreshCcw } from "lucide-react";
 import { useEffect, useState } from "react";
-import { applicationType, Props } from "@/app/lib/types";
+import {  Props } from "@/app/lib/types";
 import { GooeyToaster, gooeyToast } from "goey-toast";
 
 export default function Syncbutton({ fetchData }: Props) {

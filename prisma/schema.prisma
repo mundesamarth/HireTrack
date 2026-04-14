@@ -17,7 +17,7 @@ model Application {
   status String
   location String?
   interviewDate DateTime?
-  emailId String @unique
+  emailId String? @unique
   interviewType String?
   userId String
   user User @relation(fields: [userId],references:[id])
