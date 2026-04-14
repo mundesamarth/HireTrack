@@ -8,6 +8,7 @@ type applicationType = {
     status: Status;
     interviewType: string;
     interviewDate: string;
+    source: string;
   };
 
 export default function KanbanScrollSection({
@@ -41,7 +42,7 @@ export default function KanbanScrollSection({
           </div>
           <div className="flex justify-between text-sm border-t border-border px-4 py-3">
             <div>
-                <p className="text-xs">Gmail Sync</p>
+                <p className="text-xs">{app.source === "MANUAL" ? "Manual Input" : "Gmail Sync" }</p>
             </div>
             <div className="inline-flex  text-xs itesm-center border min-w-0 min-h-0  px-2.5 rounded-[8px] py-1 mt-0.5 font-medium shrink-0 border-strong bg-surface-muted">
 

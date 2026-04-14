@@ -59,6 +59,7 @@ export async function POST(req: Request) {
         status: validatedData.stage.toUpperCase(),
         interviewDate: validatedData.interviewDate,
         interviewType: validatedData.workMode,
+        source: "MANUAL",
         user: {
           connect: { id: sessionUserId },
         },

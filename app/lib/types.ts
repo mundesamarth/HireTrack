@@ -6,6 +6,8 @@ export type applicationType = {
   status: Status;
   interviewType: string;
   interviewDate: string;
+    source: string;
+
 };
 
 export type Props = {
