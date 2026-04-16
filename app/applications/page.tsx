@@ -1,16 +1,41 @@
-import TopheaderSection from "../components/Topheader"
+"use client";
+import { useEffect, useState } from "react";
+import TopheaderSection from "../components/Topheader";
+import TopmetricsSection from "../components/TopmetricsSection";
+import { applicationType } from "../lib/types";
+import { filterApplications, loadApplication } from "@/lib/utils";
+import MainSection from "../components/applicationsSection/mainSection";
 
 export default function Applications() {
+  const [applicationContent, setApplicationContent] = useState<
+    applicationType[]
+  >([]);
+
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  async function fetchData() {
+    const app = await loadApplication();
+    setApplicationContent(app);
+    console.log(app.length);
+  }
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const filteredApplication = filterApplications(
+    applicationContent,
+    searchTerm,
+  );
+
   return (
     <div>
-       <div className="text-foreground-1">
-      <div className="border-dashed border border-red-900 w-full h-[250px] mb-20"> Applications</div>
-      <div className="border-dashed border border-red-900 w-full h-[450px] mb-20"> Applications</div>
-      <div className="border-dashed border border-red-900 w-full h-[450px] mb-20"> Applications</div>
-      <div className="border-dashed border border-red-900 w-full h-[450px] mb-20"> Applications</div>
-      <div className="border-dotted border border-red-900 w-full h-[450px] mb-20"> Applications</div>
+      <TopheaderSection
+        fetchData={fetchData}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
+      <TopmetricsSection applicationContent={filteredApplication} />
 
-    </div>Applications
+      <MainSection/>
     </div>
   );
 }

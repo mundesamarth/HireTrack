@@ -1,4 +1,6 @@
+import { applicationType } from "@/app/lib/types";
 import { clsx, type ClassValue } from "clsx";
+import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -49,20 +51,19 @@ export function kanbanTimeConversion(time: string | null) {
     return "------";
   } else {
     return new Date(time).toLocaleString("en-GB", {
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  });
-
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
   }
 }
 
 export async function loadApplication() {
   try {
-    const res = await fetch("/api/applications/",{
-      cache: "no-store"
+    const res = await fetch("/api/applications/", {
+      cache: "no-store",
     });
     const data = await res.json();
 
@@ -72,3 +73,15 @@ export async function loadApplication() {
     console.log("Something wrong in applications rendering");
   }
 }
+
+
+export function filterApplications(apps: applicationType[], searchTerm: string) {
+  const lower = searchTerm.toLowerCase();
+  return apps.filter(
+    (s) =>
+      (s.companyName || "").toLowerCase().includes(lower) ||
+      (s.status || "").toLowerCase().includes(lower) ||
+      (s.positionTitle || "").toLowerCase().includes(lower),
+  );
+}
+
