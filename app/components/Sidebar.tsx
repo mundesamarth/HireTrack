@@ -29,7 +29,7 @@ export default function Sidebar({setIsModalOpen}:{
   return (
     <aside
       className={cn(
-        "min-h-screen bg-sidebar overflow-hidden transition-[width] duration-500 ease-in-out border-r border-border hidden md:block",
+        "min-h-screen bg-sidebar overflow-hidden transition-[width] duration-500 ease-in-out border-r border-border hidden lg:block",
         isCollapsed ? "w-[88px]" : "w-[248px]",
       )}
     >

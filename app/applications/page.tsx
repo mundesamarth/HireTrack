@@ -19,8 +19,7 @@ export default function Applications() {
   }
   useEffect(() => {
     fetchData();
-  }, []);
-
+  }, []); 
   const filteredApplication = filterApplications(
     applicationContent,
     searchTerm,
@@ -35,7 +34,7 @@ export default function Applications() {
       />
       <TopmetricsSection applicationContent={filteredApplication} />
 
-      <MainSection/>
+      <MainSection application ={filteredApplication}/>
     </div>
   );
 }

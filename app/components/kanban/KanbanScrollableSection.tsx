@@ -1,26 +1,16 @@
 import { kanbanTimeConversion } from "@/lib/utils";
 import { CalendarClock } from "lucide-react";
 
-  type Status = "APPLIED" | "INTERVIEW" | "REJECTED" | "OFFER";
-type applicationType = {
-    companyName: string;
-    positionTitle: string;
-    status: Status;
-    interviewType: string;
-    interviewDate: string;
-    source: string;
-  };
+import { applicationType } from "@/app/lib/types";
 
 export default function KanbanScrollSection({
-  items,
-}: {
-  items: applicationType[];
-}) {
+  items
+}: { items: applicationType[] }) {
   return (
     <div className="overflow-hidden">
       {items.map((app) => (
         <div
-          key={app.companyName}
+          key={app.id}
           className="flex mt-2 flex-col border border-border  bg-surface p-6 pt-0 space-y-3 rounded-[12px] shadow-raised-shadow"
         >
           <div className="flex justify-between items-start gap-3 px-4 pt-4 ">

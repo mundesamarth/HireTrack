@@ -17,7 +17,7 @@ export default function TopheaderSection({fetchData, searchTerm, setSearchTerm}:
       href: "/",
     },
     {
-      label: "Application Section",
+      label: "Application ",
       subLabel: "Track every role you’ve applied to",
       href: "/applications",
     },

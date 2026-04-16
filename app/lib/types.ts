@@ -1,6 +1,7 @@
 export type Status = "APPLIED" | "INTERVIEW" | "REJECTED" | "OFFER";
 
 export type applicationType = {
+  id: number;
   companyName: string;
   positionTitle: string;
   status: Status;

@@ -1,15 +1,12 @@
 "use client";
 import { cn } from "@/lib/utils";
 import KanbanScrollSection from "./KanbanScrollableSection";
-import { applicationType } from "@/app/lib/types";
+import { applicationType, Status } from "@/app/lib/types";
 
-
- type Props = {
-   applicationContent: applicationType[];
- };
-export default function KanbanContent({
-  applicationContent,
-}: Props) {
+type Props = {
+  applicationContent: applicationType[];
+};
+export default function KanbanContent({ applicationContent }: Props) {
   const headingContent: {
     label: Status;
     badge: string;
@@ -36,16 +33,6 @@ export default function KanbanContent({
       subHeading: "Final-stage opportunities with decisions pending.",
     },
   ];
-  type Status = "APPLIED" | "INTERVIEW" | "REJECTED" | "OFFER";
-  type applicationType = {
-    companyName: string;
-    positionTitle: string;
-    status: Status;
-    interviewType: string;
-    interviewDate: string;
-  };
-
- 
 
   const grouped: Record<Status, applicationType[]> = {
     APPLIED: [],
@@ -59,7 +46,7 @@ export default function KanbanContent({
   });
 
   return (
-    <div className=" min-h-0 grid lg:grid-cols-4 gap-3 px-2 mt-2 min-h-[480px] gap-4 lg:h-[calc(100vh-290px)] lg:min-w-[1140px]  pb-2 overflow-hidden">
+    <div className=" grid lg:grid-cols-4  px-2 mt-2 min-h-[480px] gap-4 lg:h-[calc(100vh-290px)] lg:min-w-[1140px]  pb-2 overflow-hidden">
       {headingContent.map(({ label, badge, subHeading }) => {
         const items = grouped[label];
         return (
