@@ -1,36 +1,74 @@
 import { applicationType } from "@/app/lib/types";
-import { kanbanTimeConversion } from "@/lib/utils";
+import { cn, kanbanTimeConversion } from "@/lib/utils";
 
 export default function CardsSection({
   application,
 }: {
   application: applicationType[];
 }) {
+  const filterArea = [
+    {
+      label: "APPLIED",
+      badge: " bg-surface-muted text-foreground-2",
+    },
+    {
+      label: "INTERVIEW",
+      badge: " bg-emerald-950/40 text-emerald-300",
+    },
+    {
+      label: "REJECTED",
+      badge: " bg-red-950/40 text-red-300",
+    },
+    {
+      label: "OFFER",
+      badge: " bg-amber-950/40 text-amber-300",
+    },
+  ];
+
   return (
     <div>
-      {application.map((m) => (
-        <div
-          className="border border-border shadow-raised-shadow my-7 rounded-[10px] text-foreground-1 flex px-4 py-5 justify-between "
-          key={m.id}
-        >
-          <div>
-            <h3 className="">{m.companyName}</h3>
-            <p>{m.positionTitle}</p>
+      {application.map((m) => {
+        const statusStyle = filterArea.find((item) => item.label === m.status);
+        const formatted =
+          m.status.charAt(0).toUpperCase() + m.status.slice(1).toLowerCase();
+        return (
+          <div
+            className="border border-border shadow-raised-shadow my-7 rounded-[10px] text-foreground-1 grid grid-cols-4 px-4 py-5 "
+            key={m.id}
+          >
+            <div>
+              <h3 className="text-foreground-1 pb-0.5">{m.companyName}</h3>
+              <p className="text-foreground-3 text-sm">{m.positionTitle}</p>
+            </div>
+            <div>
+              <div>
+                <span
+                  className={cn(
+                    "text-xs font-medium px-2 py-0.5 rounded-full bg-opacity-20",
+                    statusStyle?.badge,
+                  )}
+                >
+                  {formatted}
+                </span>
+              </div>
+            </div>
+            <div>
+              <p className="text-foreground-3 text-xs pb-1">Next event</p>
+              <p>
+                {m.interviewDate
+                  ? `${kanbanTimeConversion(m.interviewDate)}`
+                  : "N/A"}
+              </p>
+            </div>
+            <div className="grid grid-cols-2 items-center">
+              <p className="text-xs text-foreground-3">
+                {m.interviewType ? `${m.interviewType}` : "N/A"}{" "}
+              </p>
+              <p className="text-xs text-foreground-3">{m.source}</p>
+            </div>
           </div>
-          <div>
-            <p>Status</p>
-            <p>{m.status}</p>
-          </div>
-          <div>
-            <p>Next event</p>
-            <p>{kanbanTimeConversion(m.interviewDate)}</p>
-          </div>
-          <div className="flex gap-4">
-            <p>{m.interviewType}</p>
-            <p>{m.source}</p>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

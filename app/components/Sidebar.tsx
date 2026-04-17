@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import AddJobButton from "./AddJobButton";
+import { usePathname } from "next/navigation";
 
 export default function Sidebar({setIsModalOpen}:{
   setIsModalOpen: (value: boolean) => void;
@@ -23,13 +24,13 @@ export default function Sidebar({setIsModalOpen}:{
     { href: "/settings", label: "Settings", icon: Cog },
   ];
 
-  const [activeSection, setActiveSection] = useState("Dashboard");
+  const pathName = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <aside
       className={cn(
-        "min-h-screen bg-sidebar overflow-hidden transition-[width] duration-500 ease-in-out border-r border-border hidden lg:block",
+        "min-h-screen bg-sidebar overflow-hidden transition-[width] duration-500 ease-in-out border-r border-border hidden lg:block ",
         isCollapsed ? "w-[88px]" : "w-[248px]",
       )}
     >
@@ -81,11 +82,10 @@ export default function Sidebar({setIsModalOpen}:{
           {navigation.map(({ href, label, icon: Icon }) => (
             <Link href={href} key={href}>
               <button
-                onClick={() => setActiveSection(label)}
                 className={cn(
                   "flex w-full items-center rounded-[10px] px-3 py-2.5 text-sm font-medium transition-colors duration-150",
                   isCollapsed ? "justify-center" : "gap-3",
-                  activeSection === label
+                  pathName === href
                     ? "border border-border-strong bg-surface text-foreground-1"
                     : "border border-transparent text-foreground-3 hover:border-border hover:bg-surface",
                 )}
