@@ -7,11 +7,13 @@ import TopmetricsSection from "../components/TopmetricsSection";
 import { filterApplications, loadApplication } from "@/lib/utils";
 import { applicationType } from "../lib/types";
 import AddJobModal from "../components/addModal";
+import SidebarDrawer from "../components/SidebarDrawer";
 
 export default function Dashboard() {
   const [applicationContent, setApplicationContent] = useState<
     applicationType[]
   >([]);
+
 
 
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -32,6 +34,7 @@ export default function Dashboard() {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
       />
+     
       <TopmetricsSection applicationContent={filteredApplication} />
       <MetricsSection applicationContent={filteredApplication} />
       <KanbanSection applicationContent={filteredApplication} />

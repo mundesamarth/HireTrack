@@ -106,7 +106,7 @@ export default function Sidebar({setIsModalOpen}:{
             </Link>
           ))}
         </nav>
-          <AddJobButton isCollapsed={isCollapsed} setIsModalOpen={setIsModalOpen}/>
+          <AddJobButton showLabel={!isCollapsed} setIsModalOpen={setIsModalOpen}/>
         {/* Bottom box */}
         <div className="mt-9">
           <div

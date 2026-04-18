@@ -5,15 +5,19 @@ import { Menu, Search } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Searchbar from "./Searchbar";
 import Syncbutton from "./Syncbutton";
-import {  Props, searchProps } from "@/app/lib/types";
+import { Props, searchProps } from "@/app/lib/types";
+import { useMobileDrawer } from "./context/userMobileDrawer";
+
+
 
 export default function TopheaderSection({
   fetchData,
   searchTerm,
   setSearchTerm,
-}: Props & searchProps) {
-  const pathname = usePathname();
 
+}: Props & searchProps  ) {
+  const pathname = usePathname();
+const { setIsMobileDrawerOpen } = useMobileDrawer();
   const headingLabel = [
     {
       label: "Job applications",
@@ -46,7 +50,6 @@ export default function TopheaderSection({
     <div className="flex xl:flex-row xl:justify-between xl:items-start flex-col mt-7 h-auto border-b pb-5 md:gap-2">
       {/* Left Section  */}
       <div className="flex gap-8 items-center justify-between box-border relative">
-        
         <div className="pb-4 ">
           <div className="text-[34px] font-semibold leading-none tracking-[-0.06rem] text-foreground-1 ">
             {currentHeading?.label}
@@ -56,7 +59,7 @@ export default function TopheaderSection({
           </div>
         </div>
         <div className="lg:hidden absolute right-0 top-3 bg-surface w-10 h-10 rounded-[30%] flex items-center justify-center cursor-pointer">
-          <Menu className="text-foreground-2 "/>
+          <Menu className="text-foreground-2 " onClick={() => setIsMobileDrawerOpen(true)}/>
         </div>
       </div>
       {/* Right side */}

@@ -16,7 +16,7 @@ export default function MainSection({
   const buttonStyle =
     "bg-surface-muted text-foreground-2 cursor-pointer focus:bg-surface focus:border focus:border-border";
   return (
-    <div className="my-10 w-full bg-surface h-full p-5 rounded-[10px] ">
+    <div className="my-10 w-full bg-surface h-full p-3 rounded-[10px] ">
       <div className="flex justify-between items-end  border-b border-border pb-5">
         {/* TOP SECTION */}
         <div className="text-foreground-1">
@@ -41,10 +41,7 @@ export default function MainSection({
               Newest
             </Button>
             <Button
-              className={cn(
-                buttonStyle,
-                sortOrder === "newest" && "bg-surface border border-border",
-              )}
+              className={buttonStyle}
               onClick={() => setSortOrder("oldest")}
             >
               Oldest
