@@ -26,6 +26,7 @@ model Application {
   userId String
   user User @relation(fields: [userId],references:[id])
   source Source 
+  receivedAt DateTime?
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

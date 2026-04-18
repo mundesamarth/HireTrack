@@ -1,5 +1,6 @@
 import { applicationType } from "@/app/lib/types";
 import { cn, kanbanTimeConversion } from "@/lib/utils";
+import { CalendarCheck, CalendarClock, Keyboard, Mail } from "lucide-react";
 
 export default function CardsSection({
   application,
@@ -44,7 +45,7 @@ export default function CardsSection({
               <div>
                 <span
                   className={cn(
-                    "text-xs font-medium px-2 py-0.5 rounded-full bg-opacity-20",
+                    "text-sm font-medium px-2 py-0.5 rounded-full bg-opacity-20",
                     statusStyle?.badge,
                   )}
                 >
@@ -53,18 +54,33 @@ export default function CardsSection({
               </div>
             </div>
             <div>
-              <p className="text-foreground-3 text-xs pb-1">Next event</p>
-              <p>
-                {m.interviewDate
-                  ? `${kanbanTimeConversion(m.interviewDate)}`
-                  : "N/A"}
+              <p className="text-foreground-3 text-xs pb-1">{m.status === "APPLIED" ? ("Applied on"):("Next Event")}</p>
+              <p className="flex items-center gap-1"
+            >
+               {m.interviewType ? ( <CalendarClock className= {cn("w-4 h-4",m.status === "INTERVIEW" && "text-emerald-300") } />): ("")}
+
+                {m.status === "APPLIED"
+                  ? m.receivedAt
+                    ? kanbanTimeConversion(m.receivedAt)
+                    : "N/A"
+                  : m.interviewDate
+                    ? kanbanTimeConversion(m.interviewDate)
+                    : "N/A"}
               </p>
             </div>
-            <div className="grid grid-cols-2 items-center">
-              <p className="text-xs text-foreground-3">
+            <div className="flex items-center justify-between">
+              <p className="text-foreground-2 inline-flex px-3 py-1 rounded-full bg-surface-muted text-sm">
                 {m.interviewType ? `${m.interviewType}` : "N/A"}{" "}
               </p>
-              <p className="text-xs text-foreground-3">{m.source}</p>
+              <p className="text-xs text-foreground-3 flex gap-1">
+                {" "}
+                {m.source === "GMAIL" ? (
+                  <Mail className="w-4 h-4 " />
+                ) : (
+                  <Keyboard className="w-4 h-4" />
+                )}
+                {m.source === "GMAIL" ? "Gmail" : "Manual"}
+              </p>
             </div>
           </div>
         );

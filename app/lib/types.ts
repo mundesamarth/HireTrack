@@ -7,16 +7,16 @@ export type applicationType = {
   status: Status;
   interviewType: string;
   interviewDate: string;
-    source: string;
-
+  source: string;
+  receivedAt: string;
+  createdAt: string;
 };
 
 export type Props = {
   fetchData: () => Promise<void>;
 };
 
-
 export type searchProps = {
-  searchTerm: string
-setSearchTerm: React.Dispatch<React.SetStateAction<string>>
-}
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+};

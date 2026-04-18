@@ -56,12 +56,18 @@ export default function KanbanScrollSection({
               </div>
             </div>
             <div className="rounded-[10px] bg-surface-muted border border-border p-3 flex items-start flex-col gap-1">
-              <p className="text-sm text-foreground-3">Next event</p>
+              <p className="text-sm text-foreground-3">
+                {app.status === "APPLIED" ? "Applied On" : "Next Event"}
+              </p>
               <p className="mt-2.5 text-sm text-foreground-2 font-medium flex items-center gap-2 ">
                 <CalendarClock className="w-4 h-4" />
-                {app.interviewDate
-                  ? `${kanbanTimeConversion(app.interviewDate)}`
-                  : "N/A"}
+                {app.status === "APPLIED"
+                  ? app.receivedAt
+                    ? kanbanTimeConversion(app.receivedAt)
+                    : "N/A"
+                  : app.interviewDate
+                    ? kanbanTimeConversion(app.interviewDate)
+                    : "N/A"}
               </p>
             </div>
             <div className="flex justify-between text-sm border-t border-border px-4 py-3 items-center pb-0">

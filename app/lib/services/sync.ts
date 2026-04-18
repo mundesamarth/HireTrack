@@ -91,7 +91,9 @@ export default async function syncEmail(userId: string) {
           status: gmailExtractor.status,
           location: gmailExtractor.location,
           interviewType: gmailExtractor.interview?.type,
-          source: "GMAIL"
+          source: "GMAIL",
+          receivedAt: date,
+    
         },
         create: {
           emailId: fullMessage.data.id!,
@@ -102,6 +104,8 @@ export default async function syncEmail(userId: string) {
           status: gmailExtractor.status,
           location: gmailExtractor.location,
           interviewType: gmailExtractor.interview?.type,
+          receivedAt: date,
+          source: "GMAIL",
           user: {
             connect: { id: userId },
           },

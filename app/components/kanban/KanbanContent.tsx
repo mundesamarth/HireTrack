@@ -46,7 +46,7 @@ export default function KanbanContent({ applicationContent }: Props) {
   });
 
   return (
-    <div className=" grid lg:grid-cols-4  px-2 mt-2 min-h-[480px] gap-4 lg:h-[calc(100vh-290px)] lg:min-w-[1140px]  pb-2 overflow-hidden">
+    <div className=" grid lg:grid-cols-4   px-2 mt-2 min-h-[480px] gap-4 lg:h-[calc(100vh-290px)] lg:min-w-[1140px]  pb-2 overflow-hidden">
       {headingContent.map(({ label, badge, subHeading }) => {
         const items = grouped[label];
         return (

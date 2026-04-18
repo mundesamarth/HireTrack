@@ -74,8 +74,10 @@ export async function loadApplication() {
   }
 }
 
-
-export function filterApplications(apps: applicationType[], searchTerm: string) {
+export function filterApplications(
+  apps: applicationType[],
+  searchTerm: string,
+) {
   const lower = searchTerm.toLowerCase();
   return apps.filter(
     (s) =>
@@ -85,3 +87,18 @@ export function filterApplications(apps: applicationType[], searchTerm: string) 
   );
 }
 
+export const sortedApplication = (
+  filteredApplication: applicationType[],
+  sortOrder: "newest" | "oldest",
+) => {
+  return [...filteredApplication].sort((a, b) => {
+    const dateA = new Date(a.receivedAt || a.createdAt);
+    const dateB = new Date(b.receivedAt || b.createdAt);
+
+    if (sortOrder === "newest") {
+      return dateB.getTime() - dateA.getTime();
+    } else {
+      return dateA.getTime() - dateB.getTime();
+    }
+  });
+};
