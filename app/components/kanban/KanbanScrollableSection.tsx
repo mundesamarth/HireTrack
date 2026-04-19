@@ -55,21 +55,35 @@ export default function KanbanScrollSection({
                 </p>
               </div>
             </div>
-            <div className="rounded-[10px] bg-surface-muted border border-border p-3 flex items-start flex-col gap-1">
-              <p className="text-sm text-foreground-3">
-                {app.status === "APPLIED" ? "Applied On" : "Next Event"}
-              </p>
-              <p className="mt-2.5 text-sm text-foreground-2 font-medium flex items-center gap-2 ">
-                <CalendarClock className="w-4 h-4" />
-                {app.status === "APPLIED"
-                  ? app.receivedAt
-                    ? kanbanTimeConversion(app.receivedAt)
-                    : "N/A"
-                  : app.interviewDate
-                    ? kanbanTimeConversion(app.interviewDate)
-                    : "N/A"}
-              </p>
+
+            <div className="rounded-[10px] bg-surface-muted border border-border p-3 flex justify-between ">
+              <div className="flex items-start flex-col gap-1">
+                <p className="text-sm text-foreground-3">
+                  {app.status === "APPLIED" ? "Applied On" : "Next Event"}
+                </p>
+                <p className="mt-2.5 text-sm text-foreground-2 font-medium flex items-center gap-2 ">
+                  <CalendarClock className="w-4 h-4" />
+                  {app.status === "APPLIED"
+                    ? app.receivedAt
+                      ? kanbanTimeConversion(app.receivedAt)
+                      : "N/A"
+                    : app.interviewDate
+                      ? kanbanTimeConversion(app.interviewDate)
+                      : "N/A"}
+                </p>
+              </div>
+              <div>
+                {
+                  app.status === "INTERVIEW" && <div className="inline-flex items-center gap-2 rounded-[8px]   px-2 py-1 text-xs  =">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-200 opacity-70" />
+                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                  </span>
+                </div>
+                }
+              </div>
             </div>
+
             <div className="flex justify-between text-sm border-t border-border px-4 py-3 items-center pb-0">
               <div>
                 <p className="text-xs">

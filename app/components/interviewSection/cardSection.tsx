@@ -12,7 +12,7 @@ export default function CardSectionInterview({
     <>
       {applicationContent.map((m) => (
         <div
-          className="border border-border shadow-raised-shadow my-3 rounded-[10px] text-foreground-1  px-4 py-5 w-full"
+          className="fade-inborder border-border shadow-raised-shadow my-3 rounded-[10px] text-foreground-1  px-4 py-5 w-full"
           key={m.id}
         >
           <div className="flex justify-between ">

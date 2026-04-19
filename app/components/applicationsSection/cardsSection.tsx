@@ -27,14 +27,14 @@ export default function CardsSection({
   ];
 
   return (
-    <div>
+    <div className="fade-in">
       {application.map((m) => {
         const statusStyle = filterArea.find((item) => item.label === m.status);
         const formatted =
           m.status.charAt(0).toUpperCase() + m.status.slice(1).toLowerCase();
         return (
           <div
-            className="border border-border shadow-raised-shadow my-4 rounded-[10px] text-foreground-1 grid grid-cols-4 px-4 py-5 "
+            className=" border border-border shadow-raised-shadow my-4 rounded-[10px] text-foreground-1 grid grid-cols-4 px-4 py-5 "
             key={m.id}
           >
             <div>

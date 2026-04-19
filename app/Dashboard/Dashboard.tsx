@@ -28,7 +28,7 @@ export default function Dashboard() {
   const filteredApplication = filterApplications(applicationContent, searchTerm);
 
   return (
-    <div className="min-w-0">
+    <div className="min-w-0 fade-in">
       <TopheaderSection
         fetchData={fetchData}
         searchTerm={searchTerm}

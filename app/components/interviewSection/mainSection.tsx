@@ -39,7 +39,7 @@ export default function MainSectionInterview({
         </div>
       </div>
       {/* Card Section */}
-      <div>
+      <div className="fade-in">
         <CardSectionInterview applicationContent={interviewData} />
       </div>
       {/* pagination section */}
